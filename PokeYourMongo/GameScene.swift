@@ -16,7 +16,7 @@ let monsterMask:UInt32 = 0x1 << 2 // 4
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
     // List of monster sprite atlases
-    var monsterNames = ["BlueMonster", "PurpleMonster"]
+    var monsterNames = ["BlueMonster", "PurpleMonster", "BlackMonster", "GreenMonster"]
     
     // Define our sprites
     var monster: SKSpriteNode?

@@ -143,7 +143,7 @@ class GameViewController: UIViewController {
         
         if paused {
             gameScene?.pauseGamePlay()
-            menuButton.title = "Start"
+            menuButton.title = "Play"
         } else {
             gameScene?.startGamePlay()
             menuButton.title = "Pause"
