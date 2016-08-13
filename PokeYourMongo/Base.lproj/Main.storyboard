@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BV1-FR-VrT">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--Game View Controller-->
+        <scene sceneID="tXr-a1-R10">
+            <objects>
+                <viewController id="BV1-FR-VrT" customClass="GameViewController" customModule="PokeYourMongo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="8aa-yV-Osq"/>
+                        <viewControllerLayoutGuide type="bottom" id="qHh-Mt-9TT"/>
+                    </layoutGuides>
+                    <view key="view" multipleTouchEnabled="YES" contentMode="scaleToFill" id="3se-qz-xqx">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FLJ-d4-1YZ">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                <items>
+                                    <navigationItem title="Poke Mongo" id="P6x-M4-qCT">
+                                        <barButtonItem key="rightBarButtonItem" title="Pause" id="wdk-dh-H8x">
+                                            <connections>
+                                                <action selector="menuButtonTapped" destination="BV1-FR-VrT" id="EU6-xz-i2e"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m6U-g4-K6H" userLabel="CameraView">
+                                <rect key="frame" x="0.0" y="44" width="600" height="556"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JJc-6D-2uS" userLabel="GameView" customClass="SKView">
+                                <rect key="frame" x="0.0" y="44" width="600" height="556"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="JJc-6D-2uS" firstAttribute="bottom" secondItem="m6U-g4-K6H" secondAttribute="bottom" id="5P4-KN-JRD"/>
+                            <constraint firstItem="qHh-Mt-9TT" firstAttribute="top" secondItem="m6U-g4-K6H" secondAttribute="bottom" id="B2n-Xp-M6m"/>
+                            <constraint firstItem="JJc-6D-2uS" firstAttribute="top" secondItem="m6U-g4-K6H" secondAttribute="top" id="Es5-9R-gQL"/>
+                            <constraint firstItem="JJc-6D-2uS" firstAttribute="trailing" secondItem="m6U-g4-K6H" secondAttribute="trailing" id="F9F-cY-3ig"/>
+                            <constraint firstItem="FLJ-d4-1YZ" firstAttribute="top" secondItem="3se-qz-xqx" secondAttribute="topMargin" id="JPN-1h-Sz0"/>
+                            <constraint firstItem="m6U-g4-K6H" firstAttribute="top" secondItem="FLJ-d4-1YZ" secondAttribute="bottom" id="ZeL-yL-fqK"/>
+                            <constraint firstAttribute="trailing" secondItem="FLJ-d4-1YZ" secondAttribute="trailing" id="b1V-Qu-6oK"/>
+                            <constraint firstItem="m6U-g4-K6H" firstAttribute="leading" secondItem="3se-qz-xqx" secondAttribute="leading" id="g6v-vQ-8rD"/>
+                            <constraint firstItem="JJc-6D-2uS" firstAttribute="leading" secondItem="m6U-g4-K6H" secondAttribute="leading" id="ku0-C1-YX9"/>
+                            <constraint firstItem="FLJ-d4-1YZ" firstAttribute="leading" secondItem="3se-qz-xqx" secondAttribute="leading" id="uGP-Xi-xrF"/>
+                            <constraint firstAttribute="trailing" secondItem="m6U-g4-K6H" secondAttribute="trailing" id="wgw-IQ-ffU"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="cameraView" destination="m6U-g4-K6H" id="gx2-8v-kiz"/>
+                        <outlet property="gameView" destination="JJc-6D-2uS" id="mf5-M6-qQ3"/>
+                        <outlet property="menuButton" destination="wdk-dh-H8x" id="vBl-KK-iSp"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="25" y="136"/>
+        </scene>
+    </scenes>
+</document>
