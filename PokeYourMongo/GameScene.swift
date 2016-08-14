@@ -13,16 +13,24 @@ let wallMask:UInt32 = 0x1 << 0 // 1
 let ballMask:UInt32 = 0x1 << 1 // 2
 let monsterMask:UInt32 = 0x1 << 2 // 4
 
+protocol MonsterHitCountDelegate {
+    func hitCountUpdated(hitCount: Int)
+}
+
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
     // Define our sprites
     var monster: Monster?
-    var ball: SKSpriteNode?
+    var ball: Ball?
+    var label: SKLabelNode?
     
     // Defines where user touched
     var touchLocation: CGPoint = CGPointZero
 
     var monsters: [Monster] = []
+    
+    var hitCount = 0
+    var hitCountDelegate: MonsterHitCountDelegate?
     
     override func didMoveToView(view: SKView) {
         
@@ -35,6 +43,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         createMonster()
         createBall()
         
+        label = childNodeWithName("label") as? SKLabelNode
+        label?.hidden = true
+        
         // Assign this scene as a delegate so we get collision event notifications
         self.physicsWorld.contactDelegate = self
     }
@@ -44,7 +55,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
 
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        ball?.physicsBody?.applyImpulse(CGVectorMake(0.0, 100.0))
+        ball?.node?.physicsBody?.applyImpulse(CGVectorMake(0.0, 100.0))
     }
     
     override func update(currentTime: CFTimeInterval) {
@@ -75,9 +86,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             resetBallPosition()
 
             monster.directHit()
+            label?.hidden = false
             
             self.monster = nil
 
+            hitCount += 1
+            hitCountDelegate?.hitCountUpdated(hitCount)
+            
             // Create a new monster after a short delay
             let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(1 * Double(NSEC_PER_SEC)))
             dispatch_after(delayTime, dispatch_get_main_queue()) {
@@ -85,17 +100,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 if self.monster == nil {
                     self.createMonster()
                 }
+                self.label?.hidden = true
             }
         }
     }
     
     func resetBallPosition() {
-        ball?.removeFromParent()
+        ball?.node?.removeFromParent()
         createBall()
     }
     
     func pauseGamePlay() {
-        ball?.removeAllActions()
+        ball?.node?.removeAllActions()
         monster?.stopMovement()
     }
     
@@ -107,10 +123,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func createBall() {
         
-        ball = Ball().node
+        ball = Ball()
         
-        if let ball = ball {
-            addChild(ball)
+        if let node = ball?.node {
+            addChild(node)
         }
     }
     
@@ -129,5 +145,4 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let imageNumber = Int(arc4random_uniform(monsterCount))
         return monsters[imageNumber]
     }
-    
 }

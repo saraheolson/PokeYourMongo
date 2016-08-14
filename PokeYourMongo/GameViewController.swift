@@ -17,6 +17,8 @@ class GameViewController: UIViewController {
     
     @IBOutlet var menuButton: UIBarButtonItem!
     
+    @IBOutlet var hitCountLabel: UILabel!
+    
     var gameScene: GameScene?
     var paused = false
     
@@ -76,6 +78,8 @@ class GameViewController: UIViewController {
             
             /* Set the scale mode to scale to fit the window */
             gameScene.scaleMode = .Fill
+            
+            gameScene.hitCountDelegate = self
             
             skView.presentScene(gameScene)
         }
@@ -148,5 +152,12 @@ class GameViewController: UIViewController {
             gameScene?.startGamePlay()
             menuButton.title = "Pause"
         }
+    }
+}
+
+extension GameViewController: MonsterHitCountDelegate {
+    
+    func hitCountUpdated(hitCount: Int) {
+        hitCountLabel.text = "Hit Count: \(hitCount)"
     }
 }
